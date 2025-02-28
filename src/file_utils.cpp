@@ -1,24 +1,26 @@
 #include "../src/include/file_utils.h"
 #include <fstream>
 #include <iostream>
-using namespace std;
+#include <algorithm>
 
-void mergeFiles(const vector<string>& input_files, const string& output_file) {
-    ofstream out(output_file);
+string FileUtils::readFile(const string& filename) {
+    ifstream in(filename);
+    if (!in.is_open()) {
+        cerr << "Ошибка: Не удалось открыть файл " << filename << endl;
+        return "";
+    }
+    return string((istreambuf_iterator<char>(in)), istreambuf_iterator<char>());
+}
+
+void FileUtils::writeFile(const string& filename, const string& content) {
+    ofstream out(filename);
     if (!out.is_open()) {
-        cerr << "Ошибка: Не удалось создать файл " << output_file << endl;
+        cerr << "Ошибка: Не удалось записать в файл " << filename << endl;
         return;
     }
+    out << content;
+}
 
-    for (const auto& file : input_files) {
-        ifstream in(file);
-        if (!in.is_open()) {
-            cerr << "Ошибка: Не удалось открыть файл " << file << endl;
-            continue;
-        }
-
-        out << in.rdbuf();
-        in.close();
-    }
-    out.close();
+string FileUtils::mirrorText(const string& text) {
+    return string(text.rbegin(), text.rend()); 
 }

@@ -1,7 +1,11 @@
 #pragma once
-#include <vector>
 #include <string>
-#include <fstream> 
+#include <vector>
 using namespace std;
 
-void mergeFiles(const vector<string>& input_files, const string& output_file);
+class FileUtils {
+public:
+    static string readFile(const string& filename);
+    static void writeFile(const string& filename, const string& content);
+    static string mirrorText(const string& text);
+};

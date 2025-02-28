@@ -1,2 +1,1 @@
-obj/main.o: src/main.cpp src/../src/include/playfair.h \
-  src/../src/include/file_utils.h
+obj/main.o: src/main.cpp src/../src/include/async_tasks.h
